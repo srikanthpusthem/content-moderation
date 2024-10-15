@@ -1,0 +1,36 @@
+.navbar {
+    padding: 0.5rem 1rem;
+    background-color: #343a40;
+    height: auto; /* Allow the navbar to adjust its height */
+}
+
+.navbar-brand {
+    font-weight: bold;
+    color: #ffffff !important;
+    padding: 0; /* No extra padding */
+    margin-left: 1rem; /* Added space to the left */
+    font-size: 1.25rem; /* Set font size */
+}
+
+.navbar-collapse {
+    display: flex;
+    justify-content: space-between; /* Ensures brand is on the left, links on the right */
+    align-items: center;
+    width: 100%; /* Full width for proper spacing */
+}
+
+.navbar-nav {
+    display: flex;
+    justify-content: flex-end; /* Pushes the links to the right */
+    align-items: center;
+    margin-left: auto; /* Ensures that links are pushed as far right as possible */
+}
+
+.nav-link {
+    color: rgba(255, 255, 255, 0.75);
+    padding: 0.5rem 1.5rem;
+}
+
+.nav-link:hover {
+    color: #ffffff !important;
+}

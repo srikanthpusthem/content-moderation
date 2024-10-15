@@ -1,0 +1,33 @@
+.container {
+    max-width: 400px;
+    margin-top: 40px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    padding: 0 15px;
+}
+
+/* File input styling */
+.form-control {
+    width: 60%; /* Adjusted for a consistent width */
+    margin-bottom: 20px;
+}
+
+/* Button alignment */
+.button-group {
+    display: flex;
+    justify-content: center;
+    gap: 20px; /* Space between buttons */
+}
+
+/* Ensuring buttons have the same width and appearance */
+.btn {
+    min-width: 130px;
+    padding: 0.6rem 1.5rem;
+}
+
+/* Progress bar width adjustment */
+.progress {
+    width: 60%; /* Matches the input field size */
+    margin: 20px auto; /* Ensure it is centered and spaced */
+}

@@ -1,0 +1,35 @@
+/* Examples.css */
+
+/* Container styling */
+.container {
+    margin-top: 50px;
+  }
+  
+  /* Style for headings and paragraph */
+  h2 {
+    color: #007bff;
+    font-weight: bold;
+  }
+  
+  p {
+    font-size: 1.2rem;
+    color: #555;
+  }
+  
+  /* Custom styles for example content */
+  .example-item {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: 20px;
+    border: 1px solid #dee2e6;
+  }
+  
+  .example-item h5 {
+    color: #343a40;
+  }
+  
+  .example-item p {
+    color: #6c757d;
+  }
+  

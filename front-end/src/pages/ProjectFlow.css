@@ -1,0 +1,35 @@
+/* ProjectFlow.css */
+
+/* Container styling */
+.container {
+    margin-top: 50px;
+  }
+  
+  /* Style for headings */
+  h2 {
+    color: #28a745;
+    font-weight: bold;
+  }
+  
+  p {
+    font-size: 1.2rem;
+    color: #555;
+  }
+  
+  /* Custom styles for project flow content */
+  .flow-item {
+    background-color: #e9f7ef;
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: 20px;
+    border: 1px solid #c3e6cb;
+  }
+  
+  .flow-item h5 {
+    color: #155724;
+  }
+  
+  .flow-item p {
+    color: #6c757d;
+  }
+  

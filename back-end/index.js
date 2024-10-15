@@ -7,14 +7,14 @@ const app = express();
 const PORT = process.env.PORT || 5001;
 require('dotenv').config();
 
-const awsAccessKey = process.env.***REMOVED***;
-const awsSecretKey = process.env.***REMOVED***;
+const awsAccessKey = process.env.AWS_ACCESS_KEY_ID;
+const awsSecretKey = process.env.AWS_SECRET_ACCESS_KEY;
 
 
 // AWS Configuration
 AWS.config.update({
-  accessKeyId: process.env.***REMOVED***,     // Replace with your Access Key ID
-  secretAccessKey: process.env.***REMOVED***, // Replace with your Secret Access Key
+  accessKeyId: process.env.AWS_ACCESS_KEY_ID,     // Replace with your Access Key ID
+  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY, // Replace with your Secret Access Key
   region:process.env.AWS_REGION, // e.g., 'us-east-1'
 });
 

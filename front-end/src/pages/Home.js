@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Form, ProgressBar, Container, Alert } from 'react-bootstrap';
+import { Button, Form, ProgressBar, Container, Alert, Table } from 'react-bootstrap';
 import axios from 'axios';
 import './Home.css';
 
 const Home = () => {
+  // state unm
   const [selectedFile, setSelectedFile] = useState(null);
   const [previewUrl, setPreviewUrl] = useState(null);
   const [progress, setProgress] = useState(0);
@@ -13,7 +14,6 @@ const Home = () => {
   const [moderationResults, setModerationResults] = useState(null);
 
   useEffect(() => {
-    // Cleanup old object URLs when a new file is selected or component is unmounted
     return () => {
       if (previewUrl) {
         URL.revokeObjectURL(previewUrl);
@@ -35,7 +35,6 @@ const Home = () => {
       setShowPreview(false);
     } else {
       if (previewUrl) {
-        // Clean up old object URLs
         URL.revokeObjectURL(previewUrl);
       }
       setSelectedFile(file);
@@ -50,10 +49,16 @@ const Home = () => {
   };
 
   const handleScan = () => {
+    if (!selectedFile) {
+      setErrorMessage('Please upload a file before scanning.');
+      return;
+    }
+
     const formData = new FormData();
     formData.append('file', selectedFile);
 
     setIsScanning(true);
+    setProgress(0);
 
     axios
       .post('http://localhost:5001/upload', formData, {
@@ -65,15 +70,56 @@ const Home = () => {
         },
       })
       .then((response) => {
-        console.log(response.data);
+        console.log('Upload successful, job started:', response.data);
         setModerationResults(response.data.moderationResults);
       })
       .catch((error) => {
-        console.error('Error scanning content', error.response?error.response.data:error.message);
+        console.error('Error scanning content', error.response ? error.response.data : error.message);
+        setErrorMessage('Error scanning content.');
       })
       .finally(() => {
         setIsScanning(false);
       });
+  };
+
+  const renderModerationResults = () => {
+    if (!moderationResults || !Array.isArray(moderationResults.ModerationLabels) || moderationResults.ModerationLabels.length === 0) {
+      return (
+        <Alert variant="info" className="mt-3">
+          No moderation labels found for this content.
+        </Alert>
+      );
+    }
+
+    return (
+      <Table striped bordered hover className="mt-3">
+        <thead>
+          <tr>
+            <th>Label</th>
+            <th>Parent Label</th>
+            <th>Confidence</th>
+            <th>Timestamp</th> {/* Only applicable for video */}
+          </tr>
+        </thead>
+        <tbody>
+          {moderationResults.ModerationLabels.map((result, index) => {
+            const label = result.ModerationLabel?.Name || 'Unknown'; // Safe access with optional chaining
+            const parentName = result.ModerationLabel?.ParentName || 'N/A';
+            const confidence = result.ModerationLabel?.Confidence !== undefined ? `${result.ModerationLabel.Confidence.toFixed(2)}%` : 'N/A';
+            const timestamp = result.Timestamp !== undefined ? new Date(result.Timestamp).toISOString().substr(11, 8) : 'N/A'; // For videos
+
+            return (
+              <tr key={index}>
+                <td>{label}</td>
+                <td>{parentName}</td>
+                <td>{confidence}</td>
+                <td>{timestamp}</td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </Table>
+    );
   };
 
   return (
@@ -120,18 +166,11 @@ const Home = () => {
         </div>
       )}
 
-
       {progress > 0 && (
         <ProgressBar now={progress} label={`${progress}%`} className="progress mt-3" />
       )}
 
-      {moderationResults && (
-        <div className="moderation-results">
-          <h3>Moderation Results:</h3>
-          <pre>{JSON.stringify(moderationResults, null, 2)}</pre>
-        </div>
-      )}
-
+      {renderModerationResults()}
     </Container>
   );
 };

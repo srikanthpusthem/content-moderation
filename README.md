@@ -136,15 +136,6 @@ content-moderation/
 
 ---
 
-## Screenshots
-
-### Upload and Scan
-![Upload and Scan Screenshot](https://via.placeholder.com/800x400)
-
-### Moderation Results
-![Moderation Results Screenshot](https://via.placeholder.com/800x400)
-
----
 
 ## Future Enhancements
 
